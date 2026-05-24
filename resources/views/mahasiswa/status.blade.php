@@ -6,6 +6,7 @@
 <style>
     .page-wrap {
         max-width: 1100px;
+        width: 100%;
         margin: 0 auto;
         padding: 40px 24px 64px;
     }
@@ -23,13 +24,18 @@
 
     .page-title {
         font-family: 'Sora', sans-serif;
-        font-size: 26px;
+        font-size: clamp(22px, 4vw, 26px);
         font-weight: 800;
         color: var(--navy);
         margin-bottom: 6px;
+        line-height: 1.3;
     }
 
-    .page-sub { font-size: 13px; color: var(--muted); }
+    .page-sub { 
+        font-size: 13px; 
+        color: var(--muted); 
+        line-height: 1.6;
+    }
 
     /* ─── SEARCH MY REPORT ─── */
     .search-card {
@@ -60,12 +66,17 @@
         font-size: 15px;
         color: white;
         margin-bottom: 4px;
+        position: relative;
+        z-index: 1;
     }
 
     .search-card-sub {
         font-size: 12px;
         color: rgba(255,255,255,0.55);
         margin-bottom: 16px;
+        line-height: 1.5;
+        position: relative;
+        z-index: 1;
     }
 
     .search-row {
@@ -77,6 +88,7 @@
 
     .search-input {
         flex: 1;
+        min-width: 0;
         border: 1.5px solid rgba(255,255,255,0.2);
         border-radius: 10px;
         padding: 11px 16px;
@@ -88,8 +100,14 @@
         transition: border-color 0.18s;
     }
 
-    .search-input::placeholder { color: rgba(255,255,255,0.4); }
-    .search-input:focus { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.15); }
+    .search-input::placeholder { 
+        color: rgba(255,255,255,0.4); 
+    }
+
+    .search-input:focus { 
+        border-color: rgba(255,255,255,0.5); 
+        background: rgba(255,255,255,0.15); 
+    }
 
     .search-btn {
         background: white;
@@ -105,9 +123,11 @@
         transition: all 0.18s;
     }
 
-    .search-btn:hover { background: var(--accent-lt); }
+    .search-btn:hover { 
+        background: var(--accent-lt); 
+    }
 
-    /* ─── RESULT CARD (laporan sendiri) ─── */
+    /* ─── RESULT CARD ─── */
     .result-card {
         background: white;
         border-radius: 16px;
@@ -132,12 +152,14 @@
         font-size: 17px;
         font-weight: 800;
         color: var(--navy);
+        word-break: break-word;
     }
 
     .result-date {
         font-size: 12px;
         color: var(--muted);
         margin-top: 2px;
+        line-height: 1.5;
     }
 
     .result-grid {
@@ -145,6 +167,14 @@
         grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
         gap: 16px;
         margin-bottom: 20px;
+    }
+
+    .result-item p,
+    .timeline-text,
+    .td-no,
+    .td-lab,
+    .td-catatan {
+        word-break: break-word;
     }
 
     .result-item label {
@@ -161,6 +191,7 @@
         font-size: 13px;
         font-weight: 600;
         color: var(--text);
+        line-height: 1.5;
     }
 
     /* Status badge */
@@ -173,6 +204,8 @@
         padding: 4px 10px;
         border-radius: 99px;
         letter-spacing: 0.2px;
+        line-height: 1.4;
+        white-space: nowrap;
     }
 
     .badge-dot {
@@ -180,6 +213,7 @@
         height: 6px;
         border-radius: 50%;
         background: currentColor;
+        flex-shrink: 0;
     }
 
     .badge-menunggu    { background: var(--warning-bg); color: var(--warning); }
@@ -193,14 +227,20 @@
     .badge-dikembalikan{ background: var(--danger-bg);  color: var(--danger); }
 
     /* Timeline riwayat */
-    .timeline { border-left: 2px solid var(--border); padding-left: 20px; margin-top: 4px; }
+    .timeline { 
+        border-left: 2px solid var(--border); 
+        padding-left: 20px; 
+        margin-top: 4px; 
+    }
 
     .timeline-item {
         position: relative;
         padding-bottom: 14px;
     }
 
-    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-item:last-child { 
+        padding-bottom: 0; 
+    }
 
     .timeline-item::before {
         content: '';
@@ -225,6 +265,7 @@
     .timeline-text {
         font-size: 12px;
         color: var(--text);
+        line-height: 1.5;
     }
 
     .not-found-msg {
@@ -239,9 +280,11 @@
         display: flex;
         align-items: center;
         gap: 8px;
+        line-height: 1.5;
+        word-break: break-word;
     }
 
-    /* ─── SEMUA LAPORAN (PUBLIC) ─── */
+    /* ─── SEMUA LAPORAN ─── */
     .section-divider {
         display: flex;
         align-items: center;
@@ -250,7 +293,11 @@
         animation: fadeUp 0.4s 0.15s ease both;
     }
 
-    .section-divider-line { flex: 1; height: 1px; background: var(--border); }
+    .section-divider-line { 
+        flex: 1; 
+        height: 1px; 
+        background: var(--border); 
+    }
 
     .section-divider-text {
         font-family: 'Sora', sans-serif;
@@ -280,9 +327,12 @@
         cursor: pointer;
         outline: none;
         transition: border-color 0.18s;
+        min-width: 140px;
     }
 
-    .filter-select:focus { border-color: var(--accent); }
+    .filter-select:focus { 
+        border-color: var(--accent); 
+    }
 
     .filter-count {
         font-size: 12px;
@@ -290,6 +340,7 @@
         padding: 8px 0;
         margin-left: auto;
         font-weight: 500;
+        white-space: nowrap;
     }
 
     /* TABLE */
@@ -325,8 +376,13 @@
         transition: background 0.15s;
     }
 
-    tbody tr:last-child { border-bottom: none; }
-    tbody tr:hover { background: #f8fafc; }
+    tbody tr:last-child { 
+        border-bottom: none; 
+    }
+
+    tbody tr:hover { 
+        background: #f8fafc; 
+    }
 
     tbody td {
         padding: 13px 16px;
@@ -342,8 +398,15 @@
         color: var(--accent);
     }
 
-    .td-lab { font-weight: 600; }
-    .td-catatan { color: var(--muted); max-width: 200px; }
+    .td-lab { 
+        font-weight: 600; 
+    }
+
+    .td-catatan { 
+        color: var(--muted); 
+        max-width: 200px; 
+    }
+
     .td-catatan span {
         display: -webkit-box;
         -webkit-line-clamp: 2;
@@ -359,14 +422,16 @@
         gap: 6px;
         margin-top: 24px;
         animation: fadeUp 0.4s 0.3s ease both;
+        flex-wrap: wrap;
     }
 
     .pagination-wrap .page-link {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 34px;
+        min-width: 34px;
         height: 34px;
+        padding: 0 10px;
         border-radius: 8px;
         font-size: 13px;
         font-weight: 600;
@@ -374,11 +439,24 @@
         color: var(--muted);
         border: 1.5px solid var(--border);
         transition: all 0.15s;
+        background: white;
     }
 
-    .pagination-wrap .page-link:hover { border-color: var(--accent); color: var(--accent); }
-    .pagination-wrap .page-link.active { background: var(--navy); color: white; border-color: var(--navy); }
-    .pagination-wrap .page-link.disabled { opacity: 0.4; pointer-events: none; }
+    .pagination-wrap .page-link:hover { 
+        border-color: var(--accent); 
+        color: var(--accent); 
+    }
+
+    .pagination-wrap .page-link.active { 
+        background: var(--navy); 
+        color: white; 
+        border-color: var(--navy); 
+    }
+
+    .pagination-wrap .page-link.disabled { 
+        opacity: 0.4; 
+        pointer-events: none; 
+    }
 
     /* Empty state */
     .empty-state {
@@ -387,14 +465,171 @@
         color: var(--muted);
     }
 
-    .empty-state-icon { font-size: 40px; margin-bottom: 12px; }
-    .empty-state-text { font-size: 14px; font-weight: 500; }
+    .empty-state-icon { 
+        font-size: 40px; 
+        margin-bottom: 12px; 
+    }
 
+    .empty-state-text { 
+        font-size: 14px; 
+        font-weight: 500; 
+    }
+
+    /* ─── RESPONSIVE TABLET ─── */
     @media (max-width: 768px) {
-        .search-row { flex-direction: column; }
-        .search-btn { width: 100%; }
-        table { display: block; overflow-x: auto; }
-        .result-grid { grid-template-columns: 1fr 1fr; }
+        .page-wrap {
+            padding: 32px 18px 56px;
+        }
+
+        .search-card {
+            padding: 24px;
+            border-radius: 18px;
+        }
+
+        .search-row { 
+            flex-direction: column; 
+        }
+
+        .search-btn { 
+            width: 100%; 
+        }
+
+        .result-grid { 
+            grid-template-columns: 1fr 1fr; 
+        }
+
+        .filter-count {
+            width: 100%;
+            margin-left: 0;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            min-width: 760px;
+        }
+    }
+
+    /* ─── RESPONSIVE MOBILE ─── */
+    @media (max-width: 480px) {
+        .page-wrap {
+            padding: 28px 14px 48px;
+        }
+
+        .page-header {
+            margin-bottom: 24px;
+        }
+
+        .search-card {
+            padding: 22px 18px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+        }
+
+        .search-input,
+        .search-btn {
+            font-size: 12px;
+            padding: 12px 14px;
+        }
+
+        .result-card {
+            padding: 20px 16px;
+            border-radius: 14px;
+        }
+
+        .result-card-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .result-grid { 
+            grid-template-columns: 1fr; 
+            gap: 14px;
+        }
+
+        .badge {
+            white-space: normal;
+        }
+
+        .not-found-msg {
+            align-items: flex-start;
+            font-size: 12px;
+        }
+
+        .section-divider {
+            gap: 10px;
+            margin: 30px 0 20px;
+        }
+
+        .section-divider-text {
+            font-size: 12px;
+        }
+
+        .filter-bar form {
+            display: grid !important;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .filter-select {
+            width: 100%;
+            min-width: 0;
+        }
+
+        .filter-count {
+            padding: 4px 0 0;
+            white-space: normal;
+        }
+
+        .table-wrap {
+            border-radius: 14px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        table {
+            min-width: 720px;
+        }
+
+        thead th {
+            padding: 11px 12px;
+            font-size: 10px;
+        }
+
+        tbody td {
+            padding: 12px;
+            font-size: 12px;
+        }
+
+        .pagination-wrap {
+            gap: 5px;
+        }
+
+        .pagination-wrap .page-link {
+            min-width: 32px;
+            height: 32px;
+            font-size: 12px;
+        }
+
+        .empty-state {
+            padding: 36px 18px;
+        }
+    }
+
+    @media (max-width: 360px) {
+        .search-card-title {
+            font-size: 14px;
+        }
+
+        .result-no {
+            font-size: 15px;
+        }
+
+        table {
+            min-width: 680px;
+        }
     }
 </style>
 @endpush

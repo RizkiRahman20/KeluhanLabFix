@@ -27,6 +27,15 @@ php artisan filament:install --panels
 ```
 #### pilih nama panel default yaitu admin lalu enter
 
+### Filament-shield
+```bash
+php artisan shield:generate --all
+```
+## sebelum melakukan command diatas pastikan sudah melakukan seeder terlebih dahulu
+```bash
+php artisan db:seed
+```
+
 ### DOMPDF
 ```bash
 composer require barryvdh/laravel-dompdf
